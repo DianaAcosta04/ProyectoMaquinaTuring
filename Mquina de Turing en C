@@ -1,0 +1,163 @@
+#include <stdio.h>   // Biblioteca estándar de entrada y salida
+#include <stdlib.h>  // Biblioteca estándar para gestión de memoria y conversiones
+#include <string.h>  // Biblioteca para manipulación de cadenas de caracteres
+
+#define LONGITUD_MAXIMA_CINTA 1000  // Definición del tamaño máximo de la cinta
+
+// Estructura que define la máquina de Turing
+typedef struct {
+    char *cinta;  // Cinta de la máquina de Turing
+    int cabezal;  // Posición del cabezal de lectura/escritura
+    char estado;  // Estado actual de la máquina
+} MaquinaTuring;
+
+// Inicializa la máquina de Turing con una entrada dada
+void inicializarMaquina(MaquinaTuring *maquina, const char *entrada) {
+    maquina->cinta = (char *)malloc(LONGITUD_MAXIMA_CINTA * sizeof(char));  // Reserva memoria para la cinta
+    strcpy(maquina->cinta, entrada);  // Copia la entrada proporcionada a la cinta
+    maquina->cabezal = 0;  // Inicializa la posición del cabezal al inicio de la cinta
+    maquina->estado = 'I';  // Establece el estado inicial de la máquina
+}
+
+// Mueve el cabezal de la máquina de Turing una posición a la derecha
+void moverDerecha(MaquinaTuring *maquina) {
+    maquina->cabezal++;  // Incrementa la posición del cabezal
+    if (maquina->cabezal >= strlen(maquina->cinta)) {  // Verifica si el cabezal ha excedido la longitud de la cinta
+        if (strlen(maquina->cinta) < LONGITUD_MAXIMA_CINTA - 1) {  // Si no se ha alcanzado el tamaño máximo de la cinta
+            strcat(maquina->cinta, "0");  // Añade un '0' al final de la cinta
+        } else {  // Si se ha alcanzado el tamaño máximo de la cinta
+            printf("Error: Cinta excede el tamaño máximo permitido.\n");  // Imprime un mensaje de error
+            exit(1);  // Termina el programa con un código de error
+        }
+    }
+}
+
+// Mueve el cabezal de la máquina de Turing una posición a la izquierda
+void moverIzquierda(MaquinaTuring *maquina) {
+    if (maquina->cabezal > 0) {  // Si el cabezal no está al inicio de la cinta
+        maquina->cabezal--;  // Decrementa la posición del cabezal
+    }
+}
+
+// Lee el símbolo en la posición actual del cabezal
+char leer(MaquinaTuring *maquina) {
+    return maquina->cinta[maquina->cabezal];  // Devuelve el símbolo en la posición actual del cabezal
+}
+
+// Escribe un símbolo en la posición actual del cabezal
+void escribir(MaquinaTuring *maquina, char simbolo) {
+    maquina->cinta[maquina->cabezal] = simbolo;  // Escribe el símbolo en la posición actual del cabezal
+}
+
+// Realiza una operación de suma en la cinta de la máquina de Turing
+int sumar(MaquinaTuring *maquina) {
+    char *num1 = strtok(maquina->cinta, "+");  // Separa el primer operando antes del '+'
+    char *num2 = strtok(NULL, "=");  // Separa el segundo operando antes del '='
+
+    if (num1 == NULL || num2 == NULL) {  // Verifica si la entrada es válida
+        printf("Error: Formato de entrada inválido para suma.\n");  // Imprime un mensaje de error si no es válida
+        return 0;  // Retorna 0 si hay error
+    }
+
+    int resultado = atoi(num1) + atoi(num2);  // Realiza la suma de los dos operandos
+    sprintf(maquina->cinta, "%d", resultado);  // Escribe el resultado en la cinta
+    return resultado;  // Retorna el resultado
+}
+
+// Realiza una operación de resta en la cinta de la máquina de Turing
+int restar(MaquinaTuring *maquina) {
+    char *num1 = strtok(maquina->cinta, "-");  // Separa el primer operando antes del '-'
+    char *num2 = strtok(NULL, "=");  // Separa el segundo operando antes del '='
+
+    if (num1 == NULL || num2 == NULL) {  // Verifica si la entrada es válida
+        printf("Error: Formato de entrada inválido para resta.\n");  // Imprime un mensaje de error si no es válida
+        return 0;  // Retorna 0 si hay error
+    }
+
+    int resultado = atoi(num1) - atoi(num2);  // Realiza la resta de los dos operandos
+    sprintf(maquina->cinta, "%d", resultado);  // Escribe el resultado en la cinta
+    return resultado;  // Retorna el resultado
+}
+
+// Realiza una operación de multiplicación en la cinta de la máquina de Turing
+int multiplicar(MaquinaTuring *maquina) {
+    char *multiplicando = strtok(maquina->cinta, "*");  // Separa el primer operando antes del '*'
+    char *multiplicador = strtok(NULL, "=");  // Separa el segundo operando antes del '='
+
+    if (multiplicando == NULL || multiplicador == NULL) {  // Verifica si la entrada es válida
+        printf("Error: Formato de entrada inválido para multiplicación.\n");  // Imprime un mensaje de error si no es válida
+        return 0;  // Retorna 0 si hay error
+    }
+
+    int resultado = atoi(multiplicando) * atoi(multiplicador);  // Realiza la multiplicación de los dos operandos
+    sprintf(maquina->cinta, "%d", resultado);  // Escribe el resultado en la cinta
+    return resultado;  // Retorna el resultado
+}
+
+// Realiza una operación de división en la cinta de la máquina de Turing
+int dividir(MaquinaTuring *maquina) {
+    char *dividendo = strtok(maquina->cinta, "/");  // Separa el primer operando antes del '/'
+    char *divisor = strtok(NULL, "=");  // Separa el segundo operando antes del '='
+
+    if (dividendo == NULL || divisor == NULL) {  // Verifica si la entrada es válida
+        printf("Error: Formato de entrada inválido para división.\n");  // Imprime un mensaje de error si no es válida
+        return 0;  // Retorna 0 si hay error
+    }
+
+    int num2 = atoi(divisor);  // Convierte el divisor de cadena a entero
+    if (num2 == 0) {  // Verifica si el divisor es cero
+        printf("Error: División por cero.\n");  // Imprime un mensaje de error si hay división por cero
+        return 0;  // Retorna 0 si hay error
+    }
+
+    int resultado = atoi(dividendo) / num2;  // Realiza la división de los dos operandos
+    sprintf(maquina->cinta, "%d", resultado);  // Escribe el resultado en la cinta
+    return resultado;  // Retorna el resultado
+}
+
+// Ejecuta la operación seleccionada en la máquina de Turing
+void ejecutarMaquina(MaquinaTuring *maquina, char operacion) {
+    int resultado;  // Variable para almacenar el resultado de la operación
+    printf("Cinta inicial: %s\n", maquina->cinta);  // Imprime la cinta inicial
+
+    // Selecciona la operación a realizar según el operador proporcionado
+    switch (operacion) {
+        case '+':
+            resultado = sumar(maquina);  // Llama a la función de suma
+            break;
+        case '-':
+            resultado = restar(maquina);  // Llama a la función de resta
+            break;
+        case '*':
+            resultado = multiplicar(maquina);  // Llama a la función de multiplicación
+            break;
+        case '/':
+            resultado = dividir(maquina);  // Llama a la función de división
+            break;
+        default:
+            printf("Operación no válida.\n");  // Imprime un mensaje de error si el operador es inválido
+            return;  // Retorna sin hacer nada
+    }
+
+    printf("Cinta final: %s\n", maquina->cinta);  // Imprime la cinta después de la operación
+    printf("Resultado: %d\n", resultado);  // Imprime el resultado de la operación
+}
+
+// Función principal del programa
+int main() {
+    MaquinaTuring maquina;  // Declara una instancia de la máquina de Turing
+    char entrada[100];  // Arreglo para almacenar la entrada del usuario
+    char operacion;  // Variable para almacenar la operación seleccionada
+
+    printf("Seleccione la operación (+, -, *, /): ");  // Solicita al usuario que seleccione una operación
+    scanf(" %c", &operacion);  // Lee la operación seleccionada
+
+    printf("Ingrese la expresión (por ejemplo, 12+2=): ");  // Solicita al usuario que ingrese una expresión
+    scanf("%s", entrada);  // Lee la expresión ingresada
+
+    inicializarMaquina(&maquina, entrada);  // Inicializa la máquina de Turing con la expresión proporcionada
+    ejecutarMaquina(&maquina, operacion);  // Ejecuta la máquina con la operación seleccionada
+
+    free(maquina.cinta);  // Libera la memoria reservada para la cinta
+    return 0;  // Retorna 0 indicando que el programa ha terminado correctamente
+}
