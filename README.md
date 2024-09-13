@@ -36,11 +36,11 @@ gcc mi_programa.c -o mi_programa.exe
 ```
 ### Ejecuta el archivo Python según la versión:
 
-###(python 2)
+### (python 2)
 ```bash
  python mi_programa.py 
 ```
-###(python 3)
+### (python 3)
 ```bash
  python3 mi_programa.py 
 ```
