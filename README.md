@@ -1,6 +1,6 @@
 # ProyectoMquinaTuring
 
-# Compilación de los programas:
+## Compilación de los programas:
 
 ## Compilación en C:
 
@@ -35,9 +35,14 @@ gcc mi_programa.c -o mi_programa.exe
  cd ruta/a/tu/directorio
 ```
 ### Ejecuta el archivo Python según la versión:
+
+###(python 2)
 ```bash
- python mi_programa.py (python 2)
- python3 mi_programa.py (python 3)
+ python mi_programa.py 
+```
+###(python 3)
+```bash
+ python3 mi_programa.py 
 ```
 
 ### Verificación de la Instalación de Python
