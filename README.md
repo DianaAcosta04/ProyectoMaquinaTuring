@@ -1,8 +1,8 @@
-#integrantes:
+# integrantes:
 
--Santiago Alejandro Cespedes
--Diana Katerine Acosta
--David Castellanos
+# -Santiago Alejandro Cespedes
+# -Diana Katerine Acosta
+# -David Castellanos
 
 # ProyectoMquinaTuring
 
