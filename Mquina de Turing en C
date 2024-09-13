@@ -149,7 +149,7 @@ int main() {
     char entrada[100];  // Arreglo para almacenar la entrada del usuario
     char operacion;  // Variable para almacenar la operación seleccionada
 
-    printf("Seleccione la operación (+, -, *, /): ");  // Solicita al usuario que seleccione una operación
+    printf("Seleccione la operación (+, -,): ");  // Solicita al usuario que seleccione una operación
     scanf(" %c", &operacion);  // Lee la operación seleccionada
 
     printf("Ingrese la expresión (por ejemplo, 12+2=): ");  // Solicita al usuario que ingrese una expresión
