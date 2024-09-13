@@ -1,3 +1,4 @@
+``` Python
 class Transicion:
     # Clase que representa una transición en la máquina de Turing.
     def __init__(self, estado_siguiente, simbolo_escrito, movimiento):
@@ -122,3 +123,4 @@ if __name__ == "__main__":
         ejecutar_resta(expresion)  # Llama a la función para ejecutar la resta
     else:
         print("Operación no válida.")  # Mensaje si la operación no es válida
+```
