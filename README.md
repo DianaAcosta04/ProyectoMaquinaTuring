@@ -1,3 +1,9 @@
+#integrantes:
+
+-Santiago Alejandro Cespedes
+-Diana Katerine Acosta
+-David Castellanos
+
 # ProyectoMquinaTuring
 
 ## Compilación de los programas:
