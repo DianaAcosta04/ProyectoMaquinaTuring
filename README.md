@@ -5,14 +5,24 @@
 ## Compilación en C:
 
 ### Navega hasta el Directorio donde Guardaste tu Archivo:
-## cd ruta/a/tu/directorio
 
+```bash
+cd ruta/a/tu/directorio
+````
 ### Compila tu Archivo con un Compilador (Windows, MacOs, Linux):
-## gcc mi_programa.c -o mi_programa.exe
-
+```bash
+gcc mi_programa.c -o mi_programa.exe
+```
 ### Ejecuta el Archivo Ejecutable:
-## Windows: mi_programa.exe
-## Linux o MacOs: ./mi_programa
+
+## Windows:
+```bash
+ mi_programa.exe
+```
+## Linux o MacOs: 
+
+```bash
+./mi_programa
 
 ### Verificar sla instalacion de gcc:
 ### gcc --version
